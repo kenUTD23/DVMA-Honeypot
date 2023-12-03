@@ -1,0 +1,129 @@
+Last login: Sat Dec  2 19:05:33 on ttys000
+kennethxavier@Kenneths-MacBook-Pro ~ % brew install docker
+==> Downloading https://formulae.brew.sh/api/formula.jws.json
+######################################################################### 100.0%
+==> Downloading https://formulae.brew.sh/api/cask.jws.json
+######################################################################### 100.0%
+Warning: Treating docker as a formula. For the cask, use homebrew/cask/docker
+==> Downloading https://ghcr.io/v2/homebrew/core/docker/manifests/24.0.7
+######################################################################### 100.0%
+==> Fetching dependencies for docker: docker-completion
+==> Downloading https://ghcr.io/v2/homebrew/core/docker-completion/manifests/24.
+######################################################################### 100.0%
+==> Fetching docker-completion
+==> Downloading https://ghcr.io/v2/homebrew/core/docker-completion/blobs/sha256:
+######################################################################### 100.0%
+==> Fetching docker
+==> Downloading https://ghcr.io/v2/homebrew/core/docker/blobs/sha256:195afe83829
+######################################################################### 100.0%
+==> Installing dependencies for docker: docker-completion
+==> Installing docker dependency: docker-completion
+==> Downloading https://ghcr.io/v2/homebrew/core/docker-completion/manifests/24.
+Already downloaded: /Users/kennethxavier/Library/Caches/Homebrew/downloads/b11129c3d88dd2fdd50e76b8b698d1e62aa66ee6f1bf34c3f1a5438e8e9a3090--docker-completion-24.0.7.bottle_manifest.json
+==> Pouring docker-completion--24.0.7.sonoma.bottle.tar.gz
+🍺  /usr/local/Cellar/docker-completion/24.0.7: 9 files, 337.6KB
+==> Installing docker
+==> Pouring docker--24.0.7.sonoma.bottle.tar.gz
+Error: The `brew link` step did not complete successfully
+The formula built, but is not symlinked into /usr/local
+Could not symlink bin/docker
+Target /usr/local/bin/docker
+already exists. You may want to remove it:
+  rm '/usr/local/bin/docker'
+
+To force the link and overwrite all conflicting files:
+  brew link --overwrite docker
+
+To list all files that would be deleted:
+  brew link --overwrite --dry-run docker
+
+Possible conflicting files are:
+/usr/local/bin/docker -> /Applications/Docker.app/Contents/Resources/bin/docker
+==> Summary
+🍺  /usr/local/Cellar/docker/24.0.7: 13 files, 32.3MB
+==> Running `brew cleanup docker`...
+Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
+Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
+kennethxavier@Kenneths-MacBook-Pro ~ % brew link --overwrite docker
+Linking /usr/local/Cellar/docker/24.0.7... 7 symlinks created.
+kennethxavier@Kenneths-MacBook-Pro ~ % brew install docker-compose
+==> Downloading https://ghcr.io/v2/homebrew/core/docker-compose/manifests/2.23.3
+######################################################################### 100.0%
+==> Fetching docker-compose
+==> Downloading https://ghcr.io/v2/homebrew/core/docker-compose/blobs/sha256:381
+######################################################################### 100.0%
+==> Pouring docker-compose--2.23.3.sonoma.bottle.tar.gz
+Error: The `brew link` step did not complete successfully
+The formula built, but is not symlinked into /usr/local
+Could not symlink bin/docker-compose
+Target /usr/local/bin/docker-compose
+already exists. You may want to remove it:
+  rm '/usr/local/bin/docker-compose'
+
+To force the link and overwrite all conflicting files:
+  brew link --overwrite docker-compose
+
+To list all files that would be deleted:
+  brew link --overwrite --dry-run docker-compose
+
+Possible conflicting files are:
+/usr/local/bin/docker-compose -> /Applications/Docker.app/Contents/Resources/bin/docker-compose
+==> Caveats
+Compose is now a Docker plugin. For Docker to find this plugin, symlink it:
+  mkdir -p ~/.docker/cli-plugins
+  ln -sfn /usr/local/opt/docker-compose/bin/docker-compose ~/.docker/cli-plugins/docker-compose
+==> Summary
+🍺  /usr/local/Cellar/docker-compose/2.23.3: 6 files, 56.8MB
+==> Running `brew cleanup docker-compose`...
+Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
+Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
+kennethxavier@Kenneths-MacBook-Pro ~ % mkdir honeypot_project
+cd honeypot_project
+kennethxavier@Kenneths-MacBook-Pro honeypot_project % nano docker-compose.yml
+kennethxavier@Kenneths-MacBook-Pro honeypot_project % docker-compose build
+docker-compose up -d
+[+] Building 0.0s (0/0)                                    docker:desktop-linux
+[+] Running 9/9
+ ✔ honeypot 8 layers [⣿⣿⣿⣿⣿⣿⣿⣿]      0B/0B      Pulled                    98.5s 
+   ✔ 3e17c6eae66c Pull complete                                           38.5s 
+   ✔ 0c57df616dbf Pull complete                                           75.7s 
+   ✔ eb05d18be401 Pull complete                                            0.4s 
+   ✔ e9968e5981d2 Pull complete                                            3.1s 
+   ✔ 2cd72dba8257 Pull complete                                            3.7s 
+   ✔ 6cff5f35147f Pull complete                                            5.0s 
+   ✔ 098cffd43466 Pull complete                                            6.7s 
+   ✔ b3d64a33242d Pull complete                                            7.9s 
+[+] Building 0.0s (0/0)                                    docker:desktop-linux
+[+] Running 2/2
+ ✔ Network honeypot_project_default       Created                          0.3s 
+ ✔ Container honeypot_project-honeypot-1  Started                          0.8s 
+kennethxavier@Kenneths-MacBook-Pro honeypot_project % docker-compose logs -f
+honeypot_project-honeypot-1  | [+] Starting mysql...
+honeypot_project-honeypot-1  | Starting MariaDB database server: mysqld ..
+honeypot_project-honeypot-1  | [+] Starting apache
+honeypot_project-honeypot-1  | AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.18.0.2. Set the 'ServerName' directive globally to suppress this message
+honeypot_project-honeypot-1  | Starting Apache httpd web server: apache2.
+honeypot_project-honeypot-1  | ==> /var/log/apache2/access.log <==
+honeypot_project-honeypot-1  | 
+honeypot_project-honeypot-1  | ==> /var/log/apache2/error.log <==
+honeypot_project-honeypot-1  | [Sun Dec 03 01:20:53.810554 2023] [mpm_prefork:notice] [pid 285] AH00163: Apache/2.4.25 (Debian) configured -- resuming normal operations
+honeypot_project-honeypot-1  | [Sun Dec 03 01:20:53.810810 2023] [core:notice] [pid 285] AH00094: Command line: '/usr/sbin/apache2'
+honeypot_project-honeypot-1  | 
+honeypot_project-honeypot-1  | ==> /var/log/apache2/other_vhosts_access.log <==
+honeypot_project-honeypot-1  | 
+honeypot_project-honeypot-1  | ==> /var/log/apache2/access.log <==
+honeypot_project-honeypot-1  | 192.168.65.1 - - [03/Dec/2023:01:22:40 +0000] "GET / HTTP/1.1" 302 479 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+honeypot_project-honeypot-1  | 192.168.65.1 - - [03/Dec/2023:01:22:40 +0000] "GET /login.php HTTP/1.1" 200 1050 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+honeypot_project-honeypot-1  | 192.168.65.1 - - [03/Dec/2023:01:22:40 +0000] "GET /dvwa/css/login.css HTTP/1.1" 200 741 "http://localhost/login.php" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+honeypot_project-honeypot-1  | 192.168.65.1 - - [03/Dec/2023:01:22:40 +0000] "GET /dvwa/images/login_logo.png HTTP/1.1" 200 9375 "http://localhost/login.php" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+honeypot_project-honeypot-1  | 192.168.65.1 - - [03/Dec/2023:01:22:40 +0000] "GET /login.php HTTP/1.1" 200 1050 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+honeypot_project-honeypot-1  | 192.168.65.1 - - [03/Dec/2023:01:22:40 +0000] "GET /favicon.ico HTTP/1.1" 200 1706 "http://localhost/login.php" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+honeypot_project-honeypot-1  | 192.168.65.1 - - [03/Dec/2023:01:22:48 +0000] "POST /login.php HTTP/1.1" 302 337 "http://localhost/login.php" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+honeypot_project-honeypot-1  | 192.168.65.1 - - [03/Dec/2023:01:22:48 +0000] "GET /login.php HTTP/1.1" 200 1075 "http://localhost/login.php" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+honeypot_project-honeypot-1  | 192.168.65.1 - - [03/Dec/2023:01:22:48 +0000] "GET /login.php HTTP/1.1" 200 1050 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+honeypot_project-honeypot-1  | 192.168.65.1 - - [03/Dec/2023:01:24:21 +0000] "POST /login.php HTTP/1.1" 302 337 "http://localhost/login.php" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+honeypot_project-honeypot-1  | 192.168.65.1 - - [03/Dec/2023:01:24:21 +0000] "GET /login.php HTTP/1.1" 200 1075 "http://localhost/login.php" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+honeypot_project-honeypot-1  | 192.168.65.1 - - [03/Dec/2023:01:24:21 +0000] "GET /login.php HTTP/1.1" 200 1049 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+honeypot_project-honeypot-1  | 192.168.65.1 - - [03/Dec/2023:01:24:25 +0000] "POST /login.php HTTP/1.1" 302 336 "http://localhost/login.php" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+honeypot_project-honeypot-1  | 192.168.65.1 - - [03/Dec/2023:01:24:25 +0000] "GET /login.php HTTP/1.1" 200 1076 "http://localhost/login.php" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+honeypot_project-honeypot-1  | 192.168.65.1 - - [03/Dec/2023:01:24:26 +0000] "GET /login.php HTTP/1.1" 200 1049 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
